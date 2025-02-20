@@ -9,7 +9,7 @@ router.post("/add", async (req, res) => {
     console.log("Received request body:", req.body); // Debugging log
     const { text, sentiment, category } = req.body;
 
-    // ✅ Validate request body
+    // Validate request body
     if (!text || !sentiment || !category) {
       return res.status(400).json({ error: "Missing required fields" });
     }

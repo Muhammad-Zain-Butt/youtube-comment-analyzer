@@ -10,6 +10,8 @@ app.use(express.json());
 const commentRoutes = require("./routes/comments");
 app.use("/comments", commentRoutes);
 
+const youtubeRoutes = require("./routes/youtube");
+app.use("/youtube", youtubeRoutes);
 
 
 const PORT = process.env.PORT || 5000;
