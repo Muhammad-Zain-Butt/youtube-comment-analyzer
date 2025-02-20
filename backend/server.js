@@ -1,22 +1,28 @@
 require("dotenv").config();
 const express = require("express");
-const cors = require("cors");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
-app.get("/", (req, res) => {
-    res.send("YouTube Comment Analyzer Backend is Running!");
-});
+const commentRoutes = require("./routes/comments");
+app.use("/comments", commentRoutes);
 
-// MongoDB Connection
-mongoose
-    .connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => console.log("MongoDB Connected"))
-    .catch((err) => console.error(err));
+
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
- 
+const MONGO_URI = process.env.MONGO_URI;
+
+// Connect to MongoDB
+mongoose
+  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("MongoDB Connected"))
+  .catch((err) => console.error("MongoDB Connection Error:", err));
+
+app.get("/", (req, res) => {
+  res.send("YouTube Comment Analyzer Backend is Running!");
+});
+
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

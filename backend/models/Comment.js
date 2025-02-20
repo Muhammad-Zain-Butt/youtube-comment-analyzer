@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema({
-  videoId: String,
-  author: String,
   text: String,
-  category: String, // Positive, Negative, Abusive, Suggestion, Question
+  sentiment: String, // positive, negative, neutral
+  category: String,  // question, suggestion, abusive
   createdAt: { type: Date, default: Date.now }
 });
 
